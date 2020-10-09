@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Visualizer</title>
+
+    <!-- Links -->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
+    
+</head>
+
+<body>
+    <div class="tools-wrapper">
+        <div class="items">
+            <div id="tools">
+                <h1 id="toolsHeading">TOOLS</h1>
+                
+                <input class="itemsInput" type="number" placeholder="Value">
+                <button class="itemsBtn" id="insertNode">Insert Node </button>
+                
+                <input class="itemsInput" type="number" placeholder="Value"> 
+                <button class="itemsBtn" id="findNode">Find Node</button>
+                
+                <input class="itemsInput" type="number" placeholder="Value"> 
+                <button class="itemsBtn" id="deleteNode">Delete Node</button>
+            </div>
+
+            <h3 id="travsHeading">TRAVERSALS</h3>
+            
+            <div class="travs">
+                <span id="preTrav">Pre Order</span>
+                <span id="inTrav">In Order</span>
+                <span id="postTrav">Post Order</span>
+            </div>
+            
+            <button type="submit" id="visualizeBtn">VISUALIZE !</button>
+            
+        </div>
+    </div>
+    
+    <div id="canvas"></div>
+
+    
+    <!-- LINKS -->
+    <script src="script.js"></script>
+    <script src="libraries/p5.min.js"></script>
+    <script src="sketch.js"></script>
+</body>
+</html>
