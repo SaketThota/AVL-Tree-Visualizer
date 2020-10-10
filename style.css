@@ -1,7 +1,7 @@
 /*Direct Elements*/
 
 html{
-	margin: 0;
+    margin: 0;
     padding: 0;
     font-family: 'Oxygen', sans-serif;
 }
@@ -21,11 +21,11 @@ canvas{
 
 button{
     outline: none;
-    border-radius: 1em;
+    border-radius: 0.7em;
     border: 1px solid transparent;
     background-color: transparent;
     cursor: pointer;
-    padding: 1em 0.8em;
+    padding: 0.8em 0.7em;
     font-weight: 600;
 }
 
@@ -37,36 +37,47 @@ button:hover{
 /*Id's and Classes*/
 
 .tools-wrapper{
-    /* display: grid; */
     background-image: linear-gradient(to bottom right, #7c8288,#1a2027);
     width: auto;
 }
 
 .items{
+    display: grid;
+    justify-content: center;
+    grid-template-rows: repeat(4,min-content);
     border: 2px solid rgb(167, 167, 167);
     border-radius: 1.5%;
     text-align: center;
-    margin: 1rem 1rem;
+    margin: 0.8rem 0.6rem;
+    padding: 0.3em 0.3em;
+}
+
+.tools1{
+    margin: 0;
+    padding: 0;
+    grid-row: 3/-1;
 }
 
 #tools{
+    grid-row: 1/span 2;
     display: grid;
     grid-template-rows: repeat(4, 1fr);
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
+    padding: 0 0.2em;   
     justify-content: center;
-    padding: 0.2em;
     grid-column-gap: 0.5rem;
 }
 
 #toolsHeading{
     grid-area: 1/1 / span 1/-1;
-    border-bottom: #1a2027 4px solid;
-    border-radius: 1%;
+    border-bottom: #000 4px solid;
+    border-radius: 3px;
     font-size: 3em;
     color: #fff93c;
-    letter-spacing: 0.3px;
-    margin: 1.2rem 0;
+    letter-spacing: 0.5px;
+    margin: 0.3rem 0;
+    padding-bottom: 0.1em;
 }
 
 .itemsInput{
@@ -75,10 +86,13 @@ button:hover{
     margin: 0 3% 0 3%;
     border-radius: 5px;
     text-align: center;
+    font-size: 1.1em;
+    font-weight: 500;
 }
 
 .itemsBtn{
-    margin-right: 5%;
+    font-size: 1.2em;
+    font-weight: 600;
 }
 
 #insertNode{
@@ -115,12 +129,14 @@ button:hover{
 } 
 
 #travsHeading{
-    font-size: 2.5em;
-    letter-spacing: 0.3px;
-    margin: 0 0 1.8% 0;
-    padding: 0.2em;
+    font-size: 2.8em;
+    letter-spacing: 0.6px;
+    margin: 0.2em;
+    padding: 0.2em 0;
     color: #fff942;
-    border-bottom: 4px solid #1a2027;
+    letter-spacing: 0.4px;
+    border-bottom: 5px solid #000;
+    border-radius: 2%;
 }
 
 .travs{
@@ -129,7 +145,7 @@ button:hover{
     border-radius: 4px;
     background-color: rgb(77, 253, 224);
     border: 1px solid;
-    margin: 0.8em 0.1em;
+    margin: 1.5em 0.1em;
     padding: 0.2em;
     font-size: 1.2em;
     font-weight: 600;
@@ -137,14 +153,15 @@ button:hover{
 }
 
 #visualizeBtn{
-    margin: 6% 0 0 5%;
-    width: 65%;
+    width: 70%;
     border-radius: 4px;
     background-image: linear-gradient(to right,#ec008c,#fc6767);
     border:#d10069 1px solid;
-    padding: 4%;
+    padding: 3%;
+    margin: 0.2em 0;
     color: #f5f5f5;
-    letter-spacing: 1.8px;
+    letter-spacing: 1px;
+    font-size: 1.8em;
     cursor: pointer;
     overflow: hidden;
 }
@@ -152,7 +169,6 @@ button:hover{
 /* Graph Display */
 
 /*
-1 : Reduce Cells gap
 2 : Add ripple effect https://youtu.be/ueyRcYEmsrI
 3 : Adding Moving Block
 */
