@@ -4,6 +4,7 @@ html{
     margin: 0;
     padding: 0;
     font-family: 'Oxygen', sans-serif;
+    overflow:hidden;
 }
 
 body{
@@ -67,6 +68,7 @@ button:hover{
     padding: 0 0.2em;   
     justify-content: center;
     grid-column-gap: 0.5rem;
+    position:relative;
 }
 
 #toolsHeading{
@@ -155,6 +157,7 @@ button:hover{
 #visualizeBtn{
     width: 70%;
     border-radius: 4px;
+    position:relative;
     background-image: linear-gradient(to right,#ec008c,#fc6767);
     border:#d10069 1px solid;
     padding: 3%;
@@ -165,7 +168,30 @@ button:hover{
     cursor: pointer;
     overflow: hidden;
 }
-
+rip{
+     position:absolute;
+     background: #fff;
+     transform: translate(-50%,-50%);
+     pointer-events: none;
+     border-radius: 50%;
+    animation: animate 1s linear infinite;
+    
+ }
+    
+  @keyframes animate {
+     0%
+     {
+         width:0px;
+         height:0px;
+            opacity:0.5;
+     }
+     100%
+     {
+         width:400px;
+         height:400px;
+         opacity:0;
+     }
+ } 
 /* Graph Display */
 
 /*
