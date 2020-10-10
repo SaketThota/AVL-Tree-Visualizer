@@ -1,23 +1,25 @@
 
-// let btn = document.querySelector("#visualizeBtn");
-
-// if (btn) { 
-//     btn.addEventListener("click", function (e) {
-//         console.log("clicked");
-
-//         let x = e.clientX - e.target.offsetLeft;
-//         let y = e.clientY - e.target.offsetTop;
-//         // Class Add
-    
-//         ripple.style.left = x + 'px';
-//         ripple.style.top = y + 'px';
-    
-//         this.appendChild(ripple);
-//         setTimeout(() => {
-//             // Class Rem
-//         }, 1000);
-//     });
-// }
+const btns = document.querySelectorAll("#visualizeBtn");
+ btns.forEach(btn=>{
+    btn.addEventListener("click", function (e) {
+        console.log("clicked");
+        let x = e.clientX-e.target.offsetLeft ;
+        let y = e.clientY -e.target.offsetTop;
+        console.log(e.clientX);
+        console.log(e.clientY);
+console.log(e.target.offsetLeft);
+console.log(e.target.offsetTop);
+console.log(e.target.tagName);
+        let ripple=document.createElement('rip');
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';  
+        this.appendChild(ripple);
+         setTimeout(() => {
+           ripple.remove()
+        },1000);
+        });
+     });
+ 
 
 
 /* #visualizeBtn::before{
