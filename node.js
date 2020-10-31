@@ -1,4 +1,4 @@
-var wRange = w-toolsWidth;
+var wRange = w - toolsWidth, rotateMessage, startIdx = 0;
 
 function Node(val, x, y, sz, dist, factor, leftSize, rightSize) {
     this.value = val;
@@ -6,35 +6,41 @@ function Node(val, x, y, sz, dist, factor, leftSize, rightSize) {
     this.right = null;
     this.x = x;
     this.y = y;
-    this.sz = sz;
-    this.dist = dist;
-    this.factor = factor;
+    this.factor = 0;
     this.leftSize = 0;
     this.rightSize = 0;
 }
 
 Node.prototype.addNode = function (n, parent, sz) {
     if (n.value < this.value) {
+        nodes.push(this);
+        directions.push("L");
         if (this.left == null) {
             this.left = n;
             this.left.sz = sz;
-
+            nodes.push(this.left);
+            
             assign(this.left, this, 1);
         }
-        else
+        else { 
             this.left.addNode(n , this , sz);
+        }
     }
     else if (n.value > this.value) {
+        nodes.push(this);
+        directions.push("R");
         if (this.right == null) {
             this.right = n;
             this.right.sz = sz;
+            nodes.push(this.right);
 
             assign(this.right, this, 0);
         }
-        else
-        this.right.addNode(n , this , sz);
+        else { 
+            this.right.addNode(n , this , sz);
+        }
     }
-};
+}
 
 function assign(cur, parent, flag) { 
     if (flag == 1) 
@@ -76,23 +82,74 @@ function assign(cur, parent, flag) {
         
     line(x1, y1, x2, y2);   
 
-    tree.root.calcFactor(cur);
+    tree.root.calcFactor();
+    tree.root.calcTreeFunc();
+
+    console.log("Directions -> ");
+    console.log(directions);
+    console.log("Node -> ");
+    console.log(nodes);
+    balanceTree();
 }
 
-Node.prototype.calcFactor = function (cur) {
-    cur.factor = this.getHeight(cur.left) - this.getHeight(cur.right);
-    return this.factor;
+function balanceTree() { 
+    for (let i = nodes.length - 1; i >= 0; --i) { 
+        if (nodes[i].factor < -1 || nodes[i].factor > 1) { 
+            rotateMessage = "";
+            rotateMessage += directions[i];
+            rotateMessage += directions[i+1];
+            startIdx = i;
+            console.log("Start Index - " + startIdx);
+           
+            if (rotateMessage == "LL") {
+                rotateLL();
+            } else if (rotateMessage == "RR") {
+                rotateRR();
+            } else if (rotateMessage == "LR") {
+                rotateLR();
+            } else { 
+                rotateRL();
+            }
+
+            tree.root.calcFactor();
+            tree.root.calcTreeFunc();
+        }
+    }
+}
+
+Node.prototype.calcTreeFunc = function () { 
+    if (this.left != null) 
+        this.left.calcTreeFunc();
+
+    if (this.right != null) 
+        this.right.calcTreeFunc();
+
+    this.calcFactor();
+}
+
+Node.prototype.calcFactor = function () {
+    let lSize = 0, rSize = 0;
+
+    if (this.left != null) { 
+        lSize = this.left.getHeight(this.left) + 1;
+        this.leftSize = lSize;
+    }
+
+    if (this.right != null) { 
+        rSize = this.right.getHeight(this.right) + 1;
+        this.rightSize = rSize;
+    }
+    this.factor = lSize - rSize;
 }
 
 Node.prototype.getHeight = function (cur) {
     let height = 0;
 
-    if (cur === null || typeof cur == "undefined") {
+    if (cur === null || typeof cur == "undefined")
         height = -1;
-    } else {
-        height = Math.max(this.getHeight(cur.left), this.getHeight(cur.right))+1;
-    }
-
+    else
+        height = Math.max(this.getHeight(cur.left), this.getHeight(cur.right)) + 1;
+    
     return height;
 }
 
@@ -100,11 +157,11 @@ Node.prototype.preVisit = function() {
     if (this.left != null) 
         this.left.preVisit();
 
-    console.log(this.value +" "+ this.factor);
-
+    console.log(this.value + " " + this.factor);
+    
     if (this.right != null) 
         this.right.preVisit();
-};
+}
 
 Node.prototype.inVisit = function() {
     console.log(this.value);
@@ -116,7 +173,7 @@ Node.prototype.inVisit = function() {
     if (this.right != null) { 
         this.right.inVisit();
     }
-};
+}
 
 Node.prototype.postVisit = function() {
     if (this.left != null) { 
@@ -128,7 +185,7 @@ Node.prototype.postVisit = function() {
     }
     
     console.log(this.value);
-};
+}
 
 Node.prototype.search = function(val) {
     if (this.value == val) 
@@ -139,8 +196,7 @@ Node.prototype.search = function(val) {
         return this.right.search(val);
     
     return null;
-};
-
+}
 
 function find(code) { 
     let val = document.querySelector("#findVal").value;
@@ -173,6 +229,68 @@ function del(code) {
             // entered element is not present
         } else { 
             // tree.del(val)
+        }
+    }
+}
+
+function rotateLL() { 
+    let flag = (nodes[startIdx] == tree.root);
+    let Br = nodes[startIdx + 1].right;
+    nodes[startIdx + 1].right = nodes[startIdx];
+    nodes[startIdx].left = Br;
+
+    if (flag)
+        tree.root = nodes[startIdx + 1];
+    else  
+        nodes[startIdx - 1].left = nodes[startIdx + 1];
+}
+
+function rotateRR() { 
+    let flag = (nodes[startIdx] == tree.root);
+    let Bl = nodes[startIdx + 1].left;
+    nodes[startIdx + 1].left = nodes[startIdx];
+    nodes[startIdx].right = Bl;
+
+    if (flag)
+        tree.root = nodes[startIdx + 1];
+    else
+        nodes[startIdx - 1].right = nodes[startIdx + 1];
+}
+
+function rotateRL() { 
+    let flag = (tree.root == nodes[startIdx]);
+
+    nodes[startIdx].right = nodes[startIdx + 2].left;
+    nodes[startIdx + 1].left = nodes[startIdx + 2].right;
+    nodes[startIdx + 2].left = nodes[startIdx];
+    nodes[startIdx + 2].right = nodes[startIdx + 1];
+
+    if (flag)
+        tree.root = nodes[startIdx + 2];
+    else { 
+        if (nodes[startIdx - 1].right.value == nodes[startIdx].value) {
+            nodes[startIdx - 1].right = nodes[startIdx + 2];
+        } else { 
+            nodes[startIdx - 1].left = nodes[startIdx + 2];
+        }
+    }        
+}
+
+function rotateLR() { 
+    let flag = (tree.root == nodes[startIdx]);
+
+    nodes[startIdx].left = nodes[startIdx + 2].right;
+    nodes[startIdx + 1].right = nodes[startIdx + 2].left;
+    nodes[startIdx + 2].right = nodes[startIdx];
+    nodes[startIdx + 2].left = nodes[startIdx + 1];
+
+    if (flag) {
+        tree.root = nodes[startIdx + 2];
+    } else { 
+        if (nodes[startIdx - 1].right.value == nodes[startIdx].value) {
+            nodes[startIdx - 1].right = nodes[startIdx + 2];
+        } else { 
+            nodes[startIdx - 1].left = nodes[startIdx + 2];
         }
     }
 }

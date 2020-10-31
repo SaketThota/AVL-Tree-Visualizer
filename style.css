@@ -43,7 +43,7 @@ button:hover{
     border: 2px solid rgb(167, 167, 167);
     border-radius: 1.5%;
     text-align: center;
-    margin: 1rem 0.6rem;
+    margin: 1rem 0.6rem 0 0.6rem;
     padding: 0.3em 0.3em;
 }
 

@@ -7,24 +7,14 @@ Tree.prototype.preTraverse = function () {
     this.root.preVisit();
 }
 
-function preTravBtn() { 
-    tree.preTraverse();
-}
-
-Tree.prototype.inTraverse = function() { 
+Tree.prototype.inTraverse = function () { 
+    console.log("In Trav");
     this.root.inVisit();
 }
 
-function inTravBtn() { 
-    tree.inTraverse();
-}
-
-Tree.prototype.postTraverse = function() { 
+Tree.prototype.postTraverse = function () { 
+    console.log("POST Trav");
     this.root.postVisit();
-}
-
-function postTravBtn() { 
-    tree.postTraverse();
 }
 
 Tree.prototype.search = function(val) {
@@ -34,6 +24,8 @@ Tree.prototype.search = function(val) {
 
 Tree.prototype.insertNode = function(val) {
     var n = new Node(val);
+    directions = [];
+    nodes = [];
 
     if (this.root == null) {
         this.root = n;
@@ -41,6 +33,9 @@ Tree.prototype.insertNode = function(val) {
         this.root.y = (2.1 * calcualteSize(w, h)) / 2;
         this.root.sz = calcualteSize(w, h);
         this.root.dist = w - toolsWidth + (w - toolsWidth);
+        this.root.rightSize = 0;
+        this.root.leftSize = 0;
+        this.root.factor = 0;
         
         fill(150);
         let radius = textWidth(this.root.value) + this.root.sz + textWidth(this.root.value)/3;

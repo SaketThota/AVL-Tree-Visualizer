@@ -3,7 +3,7 @@ var w = window.innerWidth,
     toolsWidth = document.querySelector(".tools-wrapper").offsetWidth,
     toolsHeight = document.querySelector(".tools-wrapper").offsetHeight;
 
-var tree, inputs;
+var tree, inputs = [78, 67, 90, 50, 75], directions = [], nodes = [];
  
 function setup() { 
     let canvas = createCanvas(w-toolsWidth , Math.max(h,toolsHeight));   
@@ -15,8 +15,10 @@ function setup() {
     background(0);
     
     tree = new Tree();
-    for (let i = 0; i < 6 ; ++i)
-        tree.insertNode(Math.round(random(1,30)));
+    for (let i = 0; i < inputs.length ; ++i)
+        tree.insertNode(inputs[i]);    
+    
+    // tree.preTraverse();
 }
 
 function windowResized() {
