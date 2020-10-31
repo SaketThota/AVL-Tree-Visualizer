@@ -20,7 +20,24 @@ Tree.prototype.postTraverse = function () {
 Tree.prototype.search = function(val) {
     var found = this.root.search(val);
     return found;
-};
+}
+
+function assignRoot(cur) { 
+    cur.x = (w - toolsWidth) / 2;
+    cur.y = (2.1 * calcualteSize(w, h)) / 2;
+    cur.sz = calcualteSize(w, h);
+    cur.dist = 2*(w - toolsWidth);
+    
+    fill(150);
+    let radius = textWidth(cur.value) + cur.sz + textWidth(cur.value)/2;
+    cur.rad = radius;
+    ellipse(cur.x, cur.y, cur.rad);
+    
+    fill(0);
+    stroke(10);
+    textSize(cur.sz);
+    text(cur.value, cur.x, cur.y - 3 + radius / 4);
+}
 
 Tree.prototype.insertNode = function(val) {
     var n = new Node(val);
@@ -29,23 +46,10 @@ Tree.prototype.insertNode = function(val) {
 
     if (this.root == null) {
         this.root = n;
-        this.root.x = (w - toolsWidth) / 2;
-        this.root.y = (2.1 * calcualteSize(w, h)) / 2;
-        this.root.sz = calcualteSize(w, h);
-        this.root.dist = w - toolsWidth + (w - toolsWidth);
         this.root.rightSize = 0;
         this.root.leftSize = 0;
         this.root.factor = 0;
-        
-        fill(150);
-        let radius = textWidth(this.root.value) + this.root.sz + textWidth(this.root.value)/3;
-        this.root.rad = radius;
-        ellipse(this.root.x, this.root.y, this.root.rad);
-        
-        fill(0);
-        stroke(10);
-        textSize(this.root.sz);
-        text(this.root.value, this.root.x, this.root.y-3 + radius / 4);
+        assignRoot(tree.root);
     }
     else { 
         this.root.addNode(n, this.root, calcualteSize(w, h));
@@ -53,6 +57,7 @@ Tree.prototype.insertNode = function(val) {
 };
 
 function calcualteSize(w, h) {
+    
     if (w <= 375 && h <= 570) return 13;
     else if (w <= 768) return 18;
     else if (w <= 1024) return 23;
