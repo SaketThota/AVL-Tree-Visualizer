@@ -9,7 +9,6 @@
     <!-- Links -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
-    
 </head>
 
 <body>
@@ -18,23 +17,25 @@
             <div id="tools">
                 <h1 id="toolsHeading">TOOLS</h1>
                 
-                <input class="itemsInput" type="number" placeholder="Value">
-                <button class="itemsBtn" id="insertNode">Insert Node </button>
+                <input class="itemsInput" type="number" placeholder="Value" id="insertVal">
+                <button class="itemsBtn" id="insertNode" onclick="insert(13)">Insert Node </button>
                 
-                <input class="itemsInput" type="number" placeholder="Value"> 
-                <button class="itemsBtn" id="findNode">Find Node</button>
+                <input class="itemsInput" type="number" placeholder="Value" id="findVal" > 
+                <button class="itemsBtn" id="findNode" onclick="find(13)">Find Node</button>
                 
-                <input class="itemsInput" type="number" placeholder="Value"> 
-                <button class="itemsBtn" id="deleteNode">Delete Node</button>
+                <input class="itemsInput" type="number" placeholder="Value" id="deleteVal"> 
+                <button class="itemsBtn" id="deleteNode" onclick="del(13)">Delete Node</button>
             </div>
 
             <div class="tools1">
                 <h3 id="travsHeading">TRAVERSALS</h3>
+
                 <div class="travs">
-                    <span id="preTrav">Pre Order</span>
-                    <span id="inTrav">In Order</span>
-                    <span id="postTrav">Post Order</span>
+                    <span id="preTrav" onclick="preTravBtn()">Pre Order</span>
+                    <span id="inTrav" onclick="inTravBtn()">In Order</span>
+                    <span id="postTrav" onclick="postTravBtn()">Post Order</span>
                 </div>            
+                
                 <button type="submit" id="visualizeBtn">VISUALIZE !</button>
             </div>
         </div>

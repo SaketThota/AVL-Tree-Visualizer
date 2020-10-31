@@ -3,29 +3,20 @@ var w = window.innerWidth,
     toolsWidth = document.querySelector(".tools-wrapper").offsetWidth,
     toolsHeight = document.querySelector(".tools-wrapper").offsetHeight;
 
-var tree, inputs = [10, 5, 15, 20, 25, 33, 2];
+var tree, inputs;
  
 function setup() { 
     let canvas = createCanvas(w-toolsWidth , Math.max(h,toolsHeight));   
     canvas.parent('canvas');
     canvas.style('display', 'block');
-    background(100);
+    textFont('Helvetica');
+    textStyle(BOLD);
+    textAlign(CENTER);
+    background(0);
     
-    tree = new Tree();  
-
-    for (let i = 1; i < 10; ++i)
-        tree.insert(inputs[i]);
-        
-    // console.log("pre Trav");
-    // tree.traversePreOrder();
-
-    console.log("in Trav");
-    tree.traverseInOrder();
-
-    tree.find(25);
-
-    // console.log("post Trav");
-    // tree.traversePostOrder();
+    tree = new Tree();
+    for (let i = 0; i < 6 ; ++i)
+        tree.insertNode(Math.round(random(1,30)));
 }
 
 function windowResized() {
