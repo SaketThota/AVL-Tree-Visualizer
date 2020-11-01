@@ -29,14 +29,14 @@ function assignRoot(cur) {
     cur.dist = 2*(w - toolsWidth);
     
     fill(150);
-    let radius = textWidth(cur.value) + cur.sz + textWidth(cur.value)/2;
+    let radius = textWidth(cur.value) + cur.sz + textWidth(cur.value)/5;
     cur.rad = radius;
     ellipse(cur.x, cur.y, cur.rad);
     
     fill(0);
     stroke(10);
     textSize(cur.sz);
-    text(cur.value, cur.x, cur.y - 3 + radius / 4);
+    text(cur.value, cur.x, cur.y + radius / 4);
 }
 
 Tree.prototype.insertNode = function(val) {
@@ -50,6 +50,7 @@ Tree.prototype.insertNode = function(val) {
         this.root.leftSize = 0;
         this.root.factor = 0;
         assignRoot(tree.root);
+        message.innerText = val + " Inserted Successfully.";
     }
     else { 
         this.root.addNode(n, this.root, calcualteSize(w, h));

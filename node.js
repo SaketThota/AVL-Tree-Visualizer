@@ -1,4 +1,5 @@
 var wRange = w - toolsWidth, rotateMessage, startIdx = 0;
+const message = document.querySelector(".message");
 
 function Node(val, x, y, sz, dist, factor, leftSize, rightSize) {
     this.value = val;
@@ -20,10 +21,11 @@ Node.prototype.addNode = function (n, parent, sz) {
             this.left.sz = sz;
             nodes.push(this.left);
             
-            assign(this.left, this, 1,0);
+            message.innerText = n.value + " Inserted Successfully.";
+            assign(this.left, this, 1, 0);
         }
-        else { 
-            this.left.addNode(n , this , sz);
+        else {
+            this.left.addNode(n, this, sz);
         }
     }
     else if (n.value > this.value) {
@@ -33,12 +35,15 @@ Node.prototype.addNode = function (n, parent, sz) {
             this.right = n;
             this.right.sz = sz;
             nodes.push(this.right);
-
-            assign(this.right, this, 0,0);
+            
+            message.innerText = n.value + " Inserted Successfully.";
+            assign(this.right, this, 0, 0);
         }
-        else { 
-            this.right.addNode(n , this , sz);
+        else {
+            this.right.addNode(n, this, sz);
         }
+    } else { 
+        message.innerText = n.value + " Already Exist.";
     }
 }
 
@@ -219,10 +224,10 @@ function find(code) {
         val = parseInt(val);
         let isPresent = tree.search(val);
     
-        if (isPresent == null)
-            console.log(val + " Not found");
+        if (isPresent == null) 
+            message.innerText = val + " Not found";
         else
-            console.log(val + " Found");
+            message.innerText = val + " found";
     }
 }
 
