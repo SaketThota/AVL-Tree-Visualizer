@@ -1,5 +1,6 @@
-var wRange = w - toolsWidth, rotateMessage, startIdx = 0;
+var wRange = w - toolsWidth, rotateMessage, startIdx = 0, travs;
 const message = document.querySelector(".message");
+var searchPath = [], prev;
 
 function Node(val, x, y, sz, dist, factor, leftSize, rightSize) {
     this.value = val;
@@ -95,11 +96,6 @@ function assign(cur, parent, flag, visit) {
 }
 
 function balanceTree() { 
-    console.log("Directions - ");
-    console.log(directions);
-    console.log("Nodes - ");
-    console.log(nodes);
-    
     for (let i = nodes.length - 1; i >= 0; --i) { 
         if (nodes[i].factor < -1 || nodes[i].factor > 1) { 
             rotateMessage = "";
@@ -130,6 +126,7 @@ Node.prototype.reAssign = function (parent) {
         assign(this.left, this, 1, 1);
         this.left.reAssign(this);
     }
+
     if (this.right != null) { 
         assign(this.right, this, 0, 1);
         this.right.reAssign(this);
@@ -173,28 +170,28 @@ Node.prototype.getHeight = function (cur) {
 }
 
 Node.prototype.preVisit = function () {
+    travs += this.value.toString() + " , ";
+
     if (this.left != null) 
         this.left.preVisit();
-
-    console.log(this.value);
     
     if (this.right != null) 
         this.right.preVisit();
 }
 
 Node.prototype.inVisit = function() {
-    console.log(this.value);
-
     if (this.left != null) { 
         this.left.inVisit();
     }
+
+    travs += this.value.toString() + " , ";
     
     if (this.right != null) { 
         this.right.inVisit();
     }
 }
 
-Node.prototype.postVisit = function() {
+Node.prototype.postVisit = function () {
     if (this.left != null) { 
         this.left.postVisit();
     }
@@ -203,16 +200,21 @@ Node.prototype.postVisit = function() {
         this.right.postVisit();
     }
     
-    console.log(this.value);
+    travs += this.value.toString() + " , ";
 }
 
 Node.prototype.search = function(val) {
-    if (this.value == val) 
+    if (this.value == val) {
         return this;
-    else if (val < this.value && this.left != null) 
+    }
+    else if (val < this.value && this.left != null) {
+        searchPath.push(this);
         return this.left.search(val);
-    else if (val > this.value && this.right != null) 
+    }
+    else if (val > this.value && this.right != null) { 
+        searchPath.push(this);
         return this.right.search(val);
+    }
     
     return null;
 }
@@ -222,12 +224,12 @@ function find(code) {
     
     if (val && code == 13) {
         val = parseInt(val);
-        let isPresent = tree.search(val);
+        let isPresent = tree.searchNode(val);
     
         if (isPresent == null) 
-            message.innerText = val + " Not found";
+            message.innerText = val + " Not found.";
         else
-            message.innerText = val + " found";
+            message.innerText = val + " found.";
     }
 }
 
@@ -242,12 +244,14 @@ function del(code) {
     let val = document.querySelector("#deleteVal").value;
 
     if (val && code == 13) { 
-        let isPresent = tree.search(val);
+        let isPresent = tree.searchNode(val);
 
         if (isPresent == null) {
-            // entered element is not present
+            console.log("Not present");
+            message.innerText =  val + " is not present."   
         } else { 
-            // tree.del(val)
+            tree.deleteNode(isPresent);
+            message.innerText = val + " is deleted successfully."
         }
     }
 }

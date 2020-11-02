@@ -38,8 +38,8 @@ button:hover{
     margin-bottom: 0;
     font-size: 1.4rem;
     text-align: center;
-    border: #137685 3px solid;
-    background-color: #1db9d1;
+    border: #24a1b5 3px solid;
+    background-image: linear-gradient(to bottom right,#93c3ca,#C4E0E5);
     border-radius: 3px;
 }
 
@@ -172,8 +172,6 @@ button:hover{
     cursor: pointer;
     overflow: hidden;
 }
-
-
 
 /* Graph Display */
 
