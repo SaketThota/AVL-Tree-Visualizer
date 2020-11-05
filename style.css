@@ -33,14 +33,17 @@ button:hover{
 }
 
 .message{
+    display: grid;
     padding: 0.2em;
     margin: 0.4em;
     margin-bottom: 0;
-    font-size: 1.4rem;
-    text-align: center;
+    font-size: 1.5rem;
     border: #24a1b5 3px solid;
-    background-image: linear-gradient(to bottom right,#93c3ca,#C4E0E5);
-    border-radius: 3px;
+    background-image: linear-gradient(to bottom right,#80bfc9,#d3eaee);
+    border-radius: 5px;
+    height: 10%;
+    align-items: center;
+    justify-content: center;
 }
 
 .tools-wrapper{
@@ -172,9 +175,3 @@ button:hover{
     cursor: pointer;
     overflow: hidden;
 }
-
-/* Graph Display */
-
-/*
-1 : Adding Moving Block
-*/
