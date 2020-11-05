@@ -15,6 +15,8 @@ function setup() {
     background(0);
     
     tree = new Tree();
+
+    // for (let i = 0; i < inputs.length; ++i) tree.insertNode(inputs[i]);
 }
 
 function windowResized() {

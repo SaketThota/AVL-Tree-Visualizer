@@ -73,7 +73,7 @@ function assign(cur, parent, flag, visit) {
     y1 = parent.y;
     x2 = cur.x;
     y2 = cur.y;
-
+    
     y1 += (parent.rad) / 2.2;
     if (flag) {
         x1 -= (parent.rad) / 6;
@@ -85,14 +85,20 @@ function assign(cur, parent, flag, visit) {
         x2 -= (cur.rad) / 4.5;
         y2 -= (cur.rad) / 6;
     }
-        
+    
     line(x1, y1, x2, y2);   
+    
+    noStroke();
+    fill(255, 195, 31);
+    textSize(cur.sz/2);
+    text(cur.factor, cur.x - cur.rad + (cur.sz/3), cur.y + 10);
 
-    if (visit==0) { 
-        tree.root.calcFactor();
-        tree.root.calcTreeFunc();
-        balanceTree();
-    }
+    tree.root.calcFactor();
+    tree.root.calcTreeFunc();
+    background(0);
+    assignRoot(tree.root);
+    tree.root.reAssign(tree.root);
+    balanceTree();
 }
 
 function balanceTree() { 
@@ -121,14 +127,60 @@ function balanceTree() {
     }
 }
 
+function assign2(cur, parent, flag) { 
+    if (flag == 1) 
+        cur.x = parent.x - parent.dist / 8;
+    else
+        cur.x = parent.x + parent.dist / 8;
+    
+    cur.y = parent.y + cur.sz + 40 + cur.sz/2;
+    cur.dist = parent.dist / 1.8;
+    
+    fill(150);
+    noStroke();
+    let radius = textWidth(cur.value) + cur.sz;
+    cur.rad = radius;
+    ellipse(cur.x, cur.y, radius);
+    
+    fill(0);
+    stroke(10);
+    textSize(cur.sz);
+    text(cur.value, cur.x, cur.y + (cur.sz / 4.5));
+    
+    stroke(150);
+    x1 = parent.x;
+    y1 = parent.y;
+    x2 = cur.x;
+    y2 = cur.y;
+    
+    y1 += (parent.rad) / 2.2;
+    if (flag) {
+        x1 -= (parent.rad) / 6;
+        x2 += (cur.rad) / 4.5;
+        y2 -= (cur.rad) / 6;
+    }
+    else { 
+        x1 += (parent.rad) / 5;
+        x2 -= (cur.rad) / 4.5;
+        y2 -= (cur.rad) / 6;
+    }
+    
+    line(x1, y1, x2, y2);   
+    
+    noStroke();
+    fill(255, 195, 31);
+    textSize(cur.sz/2);
+    text(cur.factor, cur.x - cur.rad + (cur.sz/3), cur.y + 10);
+}
+
 Node.prototype.reAssign = function (parent) { 
     if (this.left != null) { 
-        assign(this.left, this, 1, 1);
+        assign2(this.left, this, 1);
         this.left.reAssign(this);
     }
 
     if (this.right != null) { 
-        assign(this.right, this, 0, 1);
+        assign2(this.right, this, 0);
         this.right.reAssign(this);
     }
 }

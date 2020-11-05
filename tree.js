@@ -39,14 +39,19 @@ function assignRoot(cur) {
     cur.dist = 2*(w - toolsWidth);
     
     fill(150);
-    let radius = textWidth(cur.value) + cur.sz + textWidth(cur.value)/5;
+    let radius = textWidth(cur.value) + cur.sz + 5;
     cur.rad = radius;
     ellipse(cur.x, cur.y, cur.rad);
     
     fill(0);
     stroke(10);
     textSize(cur.sz);
-    text(cur.value, cur.x, cur.y + radius / 4);
+    text(cur.value, cur.x, cur.y + radius / 5);
+
+    noStroke();
+    fill(255, 195, 31);
+    textSize(cur.sz/2);
+    text(cur.factor, cur.x - cur.rad + (cur.sz / 2), cur.y + 10);
 }
 
 Tree.prototype.insertNode = function(val) {
