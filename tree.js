@@ -83,9 +83,13 @@ Tree.prototype.searchNode = function(val) {
 Tree.prototype.deleteNode = function (nd) { 
     searchPath = [];
     this.root.search(nd.value);
-    let isRoot = (tree.root == nd);
-    if (searchPath) prev = searchPath[searchPath.length - 1];
+    let isRoot = (tree.root == nd), prev;
+    
+    if (searchPath.length>0) prev = searchPath[searchPath.length - 1];
     else prev = null;
+
+    console.log(prev);
+    console.log(searchPath);
     
     if (nd.left == null && nd.right == null) {
         if (isRoot) { 
@@ -130,19 +134,24 @@ Tree.prototype.deleteNode = function (nd) {
 
         let nd1 = this.root.search(pred);
         prev = searchPath[searchPath.length - 1];
-
         nd.value = nd1.value;
 
         if (prev.right && prev.right.value == nd1.value) {
-            prev.right = null;
+            prev.right = nd1.right;
         } else { 
-            prev.left = null;
+            prev.left = nd1.left;
         }
     }
     
     background(0);
     assignRoot(tree.root);
     tree.root.reAssign(tree.root);
+    tree.root.calcFactor();
+    tree.root.calcTreeFunc();
+    background(0);
+    assignRoot(tree.root);
+    tree.root.reAssign(tree.root);
+    balanceTree();
 }
 
 function calcualteSize(w, h) {

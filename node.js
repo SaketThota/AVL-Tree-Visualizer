@@ -22,7 +22,7 @@ Node.prototype.addNode = function (n, parent, sz) {
             this.left.sz = sz;
             nodes.push(this.left);
             
-            message.innerText = n.value + " Inserted Successfully.";
+            message.innerText = n.value + " Inserted Successfully. ";
             assign(this.left, this, 1, 0);
         }
         else {
@@ -303,7 +303,7 @@ function del(code) {
             message.innerText =  val + " is not present."   
         } else { 
             tree.deleteNode(isPresent);
-            message.innerText = val + " is deleted successfully."
+            message.innerText = val + " is deleted successfully.";
         }
     }
 }
