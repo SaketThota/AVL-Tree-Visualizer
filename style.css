@@ -30,13 +30,14 @@ button{
 }
 
 button:hover{
-    transition: all 200ms ease;
+    transition: all 300ms ease;
 }
 
 .message{
     display: grid;
     padding: 0.2em;
-    margin: 0.3em;
+    margin: 0.2em;
+    margin-top: 0.6em;
     font-weight: 600;
     font-size: 1.5rem;
     border: #0b515c 3px solid;
@@ -53,12 +54,13 @@ button:hover{
     background-image: linear-gradient(to bottom right, #7c8288,#1a2027);
     width: min-content;
     margin: 0;
+    padding: 0;
 }
 
 .items{
     display: grid;
     justify-content: center;
-    grid-template-rows: repeat(4,min-content);
+    grid-template-rows: repeat(5,min-content);
     border: 2px solid rgb(167, 167, 167);
     border-radius: 1.5%;
     text-align: center;
@@ -66,10 +68,41 @@ button:hover{
     padding: 0.3em 0.3em;
 }
 
+.size{
+    grid-row: 3 / span 1;
+    display: flex;    
+    justify-content: center;
+    align-items: center;
+    margin: 0.6em 0;
+}
+
+#szHead{
+    font-size: 1.4rem;
+    padding: 0.3em;
+    width: 100%;
+    border-radius: 5px; 
+    text-align: center;
+}
+
+.size > button{
+    color: #fff;
+    background-color: #0069d9;
+    border: #004a99 2px solid;
+    padding: 0.3em 1em;
+    margin: 0 0.5em;
+    font-weight: 1000;
+    font-size: 1.4rem;
+}
+
+.size > button:hover{
+    background-color: #fff;
+    color: #004a99;
+}
+
 .tools1{
     margin: 0;
     padding: 0;
-    grid-row: 3/-1;
+    grid-row: 4/-1;
 }
 
 #tools{
@@ -90,7 +123,6 @@ button:hover{
     color: #fff942;
     letter-spacing: 0.6px;
     margin: 0.3rem 0;
-    padding-bottom: 0.1em;
 }
 
 .itemsInput{
@@ -144,8 +176,8 @@ button:hover{
 #travsHeading{
     font-size: 2.8em;
     letter-spacing: 1px;
-    margin: 0.2em;
-    padding: 0.2em 0;
+    margin: 0.1em;
+    padding: 0.1em 0;
     color: #fff942;
     letter-spacing: 0.4px;
     border-bottom: 5px solid #000;
@@ -157,10 +189,11 @@ button:hover{
     justify-content: space-around;
     border-radius: 4px;
     background-image: linear-gradient(to right bottom ,#f953cc,#d12b87);
+    padding: 0.1em;
     border: 2px solid #921259;
-    margin: 1.5em 0.1em;
-    padding: 0.5em 0;
+    margin: 1em 0.1em;
     font-size: 1.2rem;
     font-weight: 600;
     cursor: pointer;
+    padding: 0.3em;
 }

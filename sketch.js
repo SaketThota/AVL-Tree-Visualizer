@@ -4,6 +4,9 @@ var w = window.innerWidth,
     toolsHeight = document.querySelector(".tools-wrapper").offsetHeight;
 
 var tree;
+var inc = document.querySelector('#inc'),
+    dec = document.querySelector('#dec'),
+    szHead = document.querySelector('#szHead');
  
 function setup() { 
     let canvas = createCanvas(w-toolsWidth , Math.max(h,toolsHeight));   

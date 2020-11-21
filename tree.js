@@ -1,3 +1,5 @@
+var sz = 25,flag = 0;
+
 function Tree() {
     this.root = null;
 }
@@ -34,12 +36,12 @@ Tree.prototype.postTraverse = function () {
 
 function assignRoot(cur) { 
     cur.x = (w - toolsWidth) / 2;
-    cur.y = (2.1 * calcualteSize(w, h)) / 2;
-    cur.sz = calcualteSize(w, h);
+    cur.y = (2.1 * calculateSize(w, h)) / 2;
+    cur.sz = calculateSize(w, h);
     cur.dist = 2*(w - toolsWidth);
     
     fill(150);
-    let radius = textWidth(cur.value) + cur.sz + 5;
+    let radius = textWidth(cur.value) + cur.sz + 3;
     cur.rad = radius;
     ellipse(cur.x, cur.y, cur.rad);
     
@@ -47,6 +49,7 @@ function assignRoot(cur) {
     stroke(10);
     textSize(cur.sz);
     text(cur.value, cur.x, cur.y + radius / 5);
+    text(cur.factor, cur.x - cur.rad + (cur.sz / 3), cur.y + 10);
 
     noStroke();
     fill(255, 195, 31);
@@ -68,7 +71,7 @@ Tree.prototype.insertNode = function(val) {
         message.innerText = val + " Inserted Successfully.";
     }
     else { 
-        this.root.addNode(n, this.root, calcualteSize(w, h));
+        this.root.addNode(n, this.root, calculateSize(w, h));
     }
 }
 
@@ -88,9 +91,6 @@ Tree.prototype.deleteNode = function (nd) {
     if (searchPath.length>0) prev = searchPath[searchPath.length - 1];
     else prev = null;
 
-    console.log(prev);
-    console.log(searchPath);
-    
     if (nd.left == null && nd.right == null) {
         if (isRoot) { 
             tree.root = null;
@@ -154,13 +154,57 @@ Tree.prototype.deleteNode = function (nd) {
     balanceTree();
 }
 
-function calcualteSize(w, h) {
-    
-    if (w <= 375 && h <= 570) return 13;
-    else if (w <= 768) return 18;
-    else if (w <= 1024) return 23;
-    else return 28;
+inc.addEventListener('click',() => change(1));
+dec.addEventListener('click',() => change(-1));
+
+function change(val) { 
+    calculateSize(w, h, val);
+    background(0);
+    if (tree.root != null) { 
+        assignRoot(tree.root);
+        tree.root.reAssign(tree.root);
+    }
 }
+
+function calculateSize(w, h , flag) {
+    
+    if (flag == 1) {
+        sz++;
+    } else if (flag == -1) {
+        sz--;
+    } 
+    
+    if (w <= 375 && h <= 570) {
+        if(sz<6 || sz>18) message.innerText = "Valid Size range (6, 18)";
+        sz = Math.max(sz, 6);
+        sz = Math.min(sz, 18);
+    } else if (w <= 768) {
+        if(sz<16 || sz>25) message.innerText = "Valid Size range (16, 25)";
+        sz = Math.max(sz, 16);
+        sz = Math.min(sz, 25);
+    }
+    else if (w <= 1024) {
+        if(sz<18 || sz>32) message.innerText = "Valid Size range (18, 32)";
+        sz = Math.max(sz, 18);
+        sz = Math.min(sz, 32);
+    }
+    else { 
+        if(sz<18 || sz>45) message.innerText = "Valid Size range (18, 45)";
+        sz = Math.max(sz, 18);
+        sz = Math.min(sz, 45);
+    }
+    
+    szHead.value = sz;
+    // console.log(szHead.value);
+    return sz;
+}
+
+szHead.addEventListener("keyup", function keyHelper(event) {
+    if (event.keyCode == 13) { 
+        sz = parseInt(szHead.value);
+        change(0);
+    }
+});
 
 let findVal = document.querySelector("#findVal");
 findVal.addEventListener("keyup", function keyHelper(event) { find(event.keyCode); });

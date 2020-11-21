@@ -91,7 +91,7 @@ function assign(cur, parent, flag, visit) {
     noStroke();
     fill(255, 195, 31);
     textSize(cur.sz/2);
-    text(cur.factor, cur.x - cur.rad + (cur.sz/3), cur.y + 10);
+    text(cur.factor, cur.x - cur.rad + (cur.sz / 3), cur.y + 6 - cur.sz/2);
 
     tree.root.calcFactor();
     tree.root.calcTreeFunc();
@@ -128,6 +128,8 @@ function balanceTree() {
 }
 
 function assign2(cur, parent, flag) { 
+    cur.sz = calculateSize(w, h, 0);
+
     if (flag == 1) 
         cur.x = parent.x - parent.dist / 8;
     else
@@ -146,6 +148,7 @@ function assign2(cur, parent, flag) {
     stroke(10);
     textSize(cur.sz);
     text(cur.value, cur.x, cur.y + (cur.sz / 4.5));
+    text(cur.factor, cur.x - cur.rad + (cur.sz / 3), cur.y + 6 - cur.sz/2);
     
     stroke(150);
     x1 = parent.x;
@@ -299,7 +302,6 @@ function del(code) {
         let isPresent = tree.searchNode(val);
 
         if (isPresent == null) {
-            console.log("Not present");
             message.innerText =  val + " is not present."   
         } else { 
             tree.deleteNode(isPresent);
