@@ -6,7 +6,7 @@ function Tree() {
 
 Tree.prototype.preTraverse = function () { 
     if (tree.root) {
-        travs = "";
+        travs = "Pre-Order : ";
         this.root.preVisit();
         message.innerText = travs.substring(0, travs.length - 3);
     } else { 
@@ -16,7 +16,7 @@ Tree.prototype.preTraverse = function () {
 
 Tree.prototype.inTraverse = function () { 
     if (tree.root) {
-        travs = "";
+        travs = "In-Order : ";
         this.root.inVisit();
         message.innerText = travs.substring(0, travs.length - 3);
     } else { 
@@ -26,7 +26,7 @@ Tree.prototype.inTraverse = function () {
 
 Tree.prototype.postTraverse = function () { 
     if (tree.root) {
-        travs = "";
+        travs = "Post-Order : ";
         this.root.postVisit();
         message.innerText = travs.substring(0, travs.length - 3);
     } else { 
@@ -179,13 +179,13 @@ function calculateSize(w, h , flag) {
         sz = Math.max(sz, 6);
         sz = Math.min(sz, 18);
     } else if (w <= 768) {
-        if(sz<16 || sz>25) message.innerText = "Valid Size range (16, 25)";
-        sz = Math.max(sz, 16);
+        if(sz<10 || sz>25) message.innerText = "Valid Size range (10, 25)";
+        sz = Math.max(sz, 10);
         sz = Math.min(sz, 25);
     }
     else if (w <= 1024) {
-        if(sz<18 || sz>32) message.innerText = "Valid Size range (18, 32)";
-        sz = Math.max(sz, 18);
+        if(sz<15 || sz>32) message.innerText = "Valid Size range (15, 32)";
+        sz = Math.max(sz, 15);
         sz = Math.min(sz, 32);
     }
     else { 
@@ -195,7 +195,6 @@ function calculateSize(w, h , flag) {
     }
     
     szHead.value = sz;
-    // console.log(szHead.value);
     return sz;
 }
 
