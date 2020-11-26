@@ -186,14 +186,53 @@ button:hover{
 
 .travs{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     border-radius: 4px;
     background-image: linear-gradient(to right bottom ,#f953cc,#d12b87);
-    padding: 0.1em;
     border: 2px solid #921259;
     margin: 1em 0.1em;
-    font-size: 1.2rem;
-    font-weight: 600;
     cursor: pointer;
-    padding: 0.3em;
+}
+
+.travs > button{
+    padding: 0.5em 0.3em;
+    margin: 0;
+    border-radius: 3px;
+    font-size: 1em;
+}
+
+.travs > button:hover{
+    padding: 0.2em;
+    background-color: #000;
+    color: #d12b87;
+    font-size: 1.1em;
+}
+
+#img{
+    position: absolute;
+    text-align: center;
+    margin: 220px 0 0 480px;
+}
+
+#welcome{
+    position: absolute;
+    font-size: 80px;
+    color: white;
+    font-size: 50px;
+    margin: 150px 0 0 220px;
+    letter-spacing: 4px;
+    background: linear-gradient(90deg, #8A2387,#E94057,#F27121);
+    background-size: 80%;
+    animation: animate 12s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+@keyframes animate {
+  0% {
+    background-position: -500%;
+  }
+  100% {
+    background-position: 500%;
+  }
 }

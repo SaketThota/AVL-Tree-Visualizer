@@ -2,6 +2,9 @@ var wRange = w - toolsWidth, rotateMessage, startIdx = 0, travs;
 const message = document.querySelector(".message");
 var searchPath = [], prev;
 
+var img = document.querySelector('#img'),
+    welcome = document.querySelector('#welcome');
+
 function Node(val, x, y, sz, dist, factor, leftSize, rightSize) {
     this.value = val;
     this.left = null;
@@ -109,14 +112,22 @@ function balanceTree() {
             rotateMessage += directions[i+1];
             startIdx = i;
            
-            if (rotateMessage == "LL") 
+            if (rotateMessage == "LL") {
                 rotateLL();
-            else if (rotateMessage == "RR") 
+                message.innerText = "Applied LL Rotation.";
+            }
+            else if (rotateMessage == "RR") {
                 rotateRR();
-            else if (rotateMessage == "LR") 
+                message.innerText = "Applied RR Rotation.";
+            }
+            else if (rotateMessage == "LR") {
                 rotateLR();
-            else 
+                message.innerText = "Applied LR Rotation.";
+            }
+            else { 
                 rotateRL();
+                message.innerText = "Applied RL Rotation.";
+            }
 
             tree.root.calcFactor();
             tree.root.calcTreeFunc();
@@ -289,9 +300,21 @@ function find(code) {
 }
 
 function insert(code) { 
-    let val = document.querySelector("#insertVal").value;
+    img.style.display = 'none';
+    welcome.style.display = 'none';
 
-    if (val && code == 13)
+    let val = document.querySelector("#insertVal").value;
+    let flag = true;
+
+    for (let i = 0; i < val.length; ++i) {
+        let code = val[i].charCodeAt(0);
+        if (code >= 48 && code <= 57) continue;
+        flag = false;
+    }
+
+    if (val && code == 13 && flag == false) 
+        message.innerText = "Only Non-negative Intergers are allowed.";
+    else if (val && code == 13)
         tree.insertNode(parseInt(val));
 }
 

@@ -1,4 +1,4 @@
-var sz = 25,flag = 0;
+var sz = 23,flag = 0;
 
 function Tree() {
     this.root = null;
@@ -41,7 +41,7 @@ function assignRoot(cur) {
     cur.dist = 2*(w - toolsWidth);
     
     fill(150);
-    let radius = textWidth(cur.value) + cur.sz + 3;
+    let radius = textWidth(cur.value) + cur.sz;
     cur.rad = radius;
     ellipse(cur.x, cur.y, cur.rad);
     
@@ -54,7 +54,7 @@ function assignRoot(cur) {
     noStroke();
     fill(255, 195, 31);
     textSize(cur.sz/2);
-    text(cur.factor, cur.x - cur.rad + (cur.sz / 2), cur.y + 10);
+    text(cur.factor, cur.x - cur.rad + (cur.sz / 2.2), cur.y + 10);
 }
 
 Tree.prototype.insertNode = function(val) {

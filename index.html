@@ -14,7 +14,7 @@
 <body>
     <div class="tools-wrapper">
         <div class="message">
-            Welcome to AVL-Tree !
+            AVL - TREE
         </div>
         <div class="items">
             <div id="tools">
@@ -40,15 +40,18 @@
                 <h3 id="travsHeading">TRAVERSALS</h3>
 
                 <div class="travs">
-                    <span id="preTrav" onclick="tree.preTraverse()">Pre Order</span>
-                    <span id="inTrav" onclick="tree.inTraverse()">In Order</span>
-                    <span id="postTrav" onclick="tree.postTraverse()">Post Order</span>
+                    <button id="preTrav" onclick="tree.preTraverse()">Pre Order</button>
+                    <button id="inTrav" onclick="tree.inTraverse()">In Order</button>
+                    <button id="postTrav" onclick="tree.postTraverse()">Post Order</button>
                 </div>            
             </div>
         </div>
     </div>
     
-    <div id="canvas"></div>
+    <div id="canvas">
+        <img src="icon.png" id="img">
+        <span id="welcome">WELCOME TO AVL-TREE !</span>
+    </div>
     
     <script src="libraries/p5.min.js"></script>
     <script src="sketch.js"></script>
